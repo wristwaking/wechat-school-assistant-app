@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="contain" id="app">
+        <audio src="../../assets/success.mp3" id="success-audio"></audio>
+        <audio src="../../assets/error.mp3" id="error-audio"></audio>
+        <audio src="../../assets/delete.mp3" id="delete-audio"></audio>
+        <div class="left-menu">
+            <img class="left-menu-logo" src="../../assets/logo.png" @click="OpenRootDir">
+            <div class="left-menu-btn" @click="Taobao">
+                联系客服
+            </div>
+            <div class="left-menu-btn" @click="ChooseMenu('SCHEDULE')">
+                作业推送
+            </div>
+            <div class="left-menu-btn" @click="ChooseMenu('NOTICE')">
+                消息提醒
+            </div>
+            <div class="left-menu-btn" @click="ChooseMenu('QUESTION')">
+                题目问答
+            </div>
+            <div class="left-menu-btn" @click="ChooseMenu('AI')">
+                自动回复
+            </div>
+            <div class="left-menu-btn" @click="ChooseMenu('GROUP')">
+                设置群组
+            </div>
+            <div class="left-menu-btn" @click="ChooseMenu('DATA')">
+                综合数据
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="top-menu">
+                <div class="top-menu-time">
+                    <div v-if="launchState == 'Running'">
+                        <div class="el-icon-circle-check" style="margin-right: 10px; font-size: 20px; color: #27D04C;"></div>
+                        <span style="margin-right: auto; color: #27D04C;">微信机器人运行中</span>
+                    </div>
+                    <div v-if="launchState == 'Login'">
+                        <div class="el-icon-loading" style="margin-right: 10px; font-size: 20px; color: #006BCF;"></div>
+                        <span style="margin-right: auto; color: #006BCF;">微信机器人登录中</span>
+                    </div>
+                    <div v-if="launchState == 'Closed'">
+                        <div class="el-icon-video-pause" style="margin-right: 10px; font-size: 20px; color: #E05D4F;"></div>
+                        <span style="margin-right: auto; color: #E05D4F;">微信机器人已关闭</span>
+                    </div>
+                    <div>
+                        微信智能助教管理系统：边缘骇客编程实验室版权所有
+                    </div>
+                </div>
+                <div class="top-menu-mini" @click="MiniApp">
+                    <svg t="1701400556949" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11889" width="30" height="30"><path d="M512 64C264.8 64 64 264.8 64 512s200.8 448 448 448 448-200.8 448-448S759.2 64 512 64z m256 480H256v-64h512v64z" p-id="11890" fill="#7467bd"></path></svg>
+                </div>
+                <div class="top-menu-delete" @click="CloseApp">
+                    <svg t="1699982605168" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4058" width="30" height="30"><path d="M512 0C229.23 0 0 229.23 0 512s229.23 512 512 512c282.768 0 512-229.23 512-512S794.77 0 512 0z m234.76 656.252c7.808 7.808 7.806 20.472 0.002 28.284l-62.228 62.224c-7.808 7.808-20.47 7.814-28.286 0.002L512 602.51 367.75 746.76c-7.81 7.812-20.474 7.808-28.284 0l-62.226-62.224c-7.81-7.808-7.812-20.472 0-28.284L421.492 512l-144.25-144.25c-7.81-7.808-7.81-20.474 0-28.284l62.226-62.224c7.81-7.812 20.474-7.81 28.284 0L512 421.49l144.252-144.25c7.806-7.812 20.47-7.81 28.282 0l62.226 62.224c7.806 7.812 7.808 20.474 0 28.284L602.51 512l144.25 144.252z" fill="#E51C23" p-id="4059"></path></svg>
+                </div>
+            </div>
+            <div class="list-box" v-if="menu == 'CONTACT'">
+                <div class="list-box-tip">客服管理</div>
+                <div class="list-box-item" v-for="contact in contacts" :key="contact.id">
+                    <span>{{contact.content}}</span>
+                    <svg @click="DeleteContact(contact.id)" t="1699982605168" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4058" width="15" height="15"><path d="M512 0C229.23 0 0 229.23 0 512s229.23 512 512 512c282.768 0 512-229.23 512-512S794.77 0 512 0z m234.76 656.252c7.808 7.808 7.806 20.472 0.002 28.284l-62.228 62.224c-7.808 7.808-20.47 7.814-28.286 0.002L512 602.51 367.75 746.76c-7.81 7.812-20.474 7.808-28.284 0l-62.226-62.224c-7.81-7.808-7.812-20.472 0-28.284L421.492 512l-144.25-144.25c-7.81-7.808-7.81-20.474 0-28.284l62.226-62.224c7.81-7.812 20.474-7.81 28.284 0L512 421.49l144.252-144.25c7.806-7.812 20.47-7.81 28.282 0l62.226 62.224c7.806 7.812 7.808 20.474 0 28.284L602.51 512l144.25 144.252z" fill="#E51C23" p-id="4059"></path></svg>
+                </div>
+            </div>
+            <div class="double-box" v-if="menu == 'GROUP'">
+                <div class="single-list-box" >
+                    <div class="list-box-tip">
+                        <span>设置群组（当前：{{groups.length}} 群组）</span>
+                    </div>
+                    <div class="list-box-item" v-for="group in groups" :key="group.id">
+                        <span>{{group.content}}</span>
+                        <svg @click="DeleteGroup(group.id)" t="1699982605168" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4058" width="15" height="15"><path d="M512 0C229.23 0 0 229.23 0 512s229.23 512 512 512c282.768 0 512-229.23 512-512S794.77 0 512 0z m234.76 656.252c7.808 7.808 7.806 20.472 0.002 28.284l-62.228 62.224c-7.808 7.808-20.47 7.814-28.286 0.002L512 602.51 367.75 746.76c-7.81 7.812-20.474 7.808-28.284 0l-62.226-62.224c-7.81-7.808-7.812-20.472 0-28.284L421.492 512l-144.25-144.25c-7.81-7.808-7.81-20.474 0-28.284l62.226-62.224c7.81-7.812 20.474-7.81 28.284 0L512 421.49l144.252-144.25c7.806-7.812 20.47-7.81 28.282 0l62.226 62.224c7.806 7.812 7.808 20.474 0 28.284L602.51 512l144.25 144.252z" fill="#E51C23" p-id="4059"></path></svg>
+                    </div>
+                </div>
+                <div class="single-manage-box">
+                    <div class="single-list-row">
+                        <el-input
+                            placeholder="填写微信群名"
+                            prefix-icon="el-icon-user-solid"
+                            v-model="groupName">
+                        </el-input>
+                    </div>
+                    <div class="single-manage" style="margin-top: auto; padding-top: 20px;">
+                        <div @click="groupName = ''">清空数据</div>
+                        <div class="single-manage-submit" @click="AddGroupForm">添加微信群</div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-box" v-if="menu == 'AI'">
+                <div class="time-box-tip">自动回复</div>
+                <div class="time-box-row">
+                    <div>机器人授权配置：</div>
+                    <el-select style="flex: 1" v-model="baiduKey.state" placeholder="请选择百度智能云开启状态">
+                        <el-option label="开启自动回复" :value="true"></el-option>
+                        <el-option label="关闭自动回复" :value="false"></el-option>
+                    </el-select>
+                </div>
+                <div class="time-box-row">
+                    <div>百度智能云密钥：</div>
+                    <el-input class="time-select"
+                        placeholder="client id"
+                        suffix-icon="el-icon-key"
+                        v-model="baiduKey.clientId">
+                    </el-input>
+                </div>
+                <div class="time-box-row">
+                    <div>百度智能云密钥：</div>
+                    <el-input class="time-select"
+                        placeholder="client secret"
+                        suffix-icon="el-icon-key"
+                        v-model="baiduKey.clientSecret">
+                    </el-input>
+                </div>
+                <div class="time-submit" @click="SubmitTime">确定调整自动回复配置</div>
+            </div>
+            <div class="list-box" v-if="menu == 'DATA'">
+                <div class="time-box-tip">综合数据</div>
+                <div id="echart-figure">
+
+                </div>
+            </div>
+            <div class="double-box" v-if="menu == 'SCHEDULE'">
+                <div class="single-list-box" >
+                    <div class="list-box-tip">
+                        <span>作业推送（当前：{{schedules.length}} 推送）</span>
+                        <el-button type="danger" plain @click="clearExpiredSchedules">清理过期推送</el-button>
+                    </div>
+                    <div class="schedule-item" v-for="item in schedules" :key="item.id">
+                        <div class="schedule-item-top">
+                            <div class="schedule-item-top-time">推送时间：{{item.date}} {{item.time}}</div>
+                            <div class="schedule-item-top-copy" @click="CopySchedule(item.id)">更新</div>
+                            <div class="schedule-item-top-del" @click="DeleteSchedule(item.id)">删除</div>
+                        </div>
+                        <div class="schedule-item-content">推送群组：<span>{{item.groupName}}</span></div>
+                        <div class="schedule-item-content">推送作业：<span style="color: #757C8E;">{{item.file}}</span></div>
+                    </div>
+                </div>
+                <div class="single-manage-box">
+                    <div class="single-list-row">
+                        <div>推送日期：</div>
+                        <el-date-picker style="flex: 1;"
+                            value-format="yyyy-MM-dd"
+                            v-model="scheduleForm.date"
+                            type="date"
+                            placeholder="选择推送日期">
+                        </el-date-picker>
+                    </div>
+                    <div class="single-list-row">
+                        <div>推送时间：</div>
+                        <el-time-picker
+                            value-format="HH:mm:ss"
+                            class="time-select"
+                            v-model="scheduleForm.time"
+                            :picker-options="{selectableRange: '00:00:00 - 23:59:59'}"
+                            placeholder="设置推送时间">
+                        </el-time-picker>
+                    </div>
+                    <div class="single-list-row">
+                        <div>推送群组：</div>
+                        <el-select style="flex: 1" multiple filterable v-model="scheduleForm.groupName" placeholder="选择需要推送微信群">
+                            <el-option
+                                v-for="item in groups"
+                                :key="item.id"
+                                :label="item.content"
+                                :value="item.content">
+                            </el-option>
+                        </el-select>
+                        <el-button @click="ChooseAllGroup('schedules')" style="margin-left: 20px;" type="primary" plain>全选</el-button>
+                    </div>
+                    <div class="single-list-row">
+                        <div>选择作业：</div>
+                        <el-button @click="OpenWorkSpace" style="flex: 1" type="primary" plain>打开我的作业管理区</el-button>
+                    </div>
+
+                    <div class="single-list-row">
+                        <div>选择作业：</div>
+                        <el-select style="flex: 1" v-model="scheduleForm.file" placeholder="选择需要推送作业">
+                            <el-option
+                                v-for="(item, index) in files"
+                                :key="index"
+                                :label="item"
+                                :value="item">
+                            </el-option>
+                        </el-select>
+                        <el-button @click="RefreshScheduleFile" style="margin-left: 20px;" type="primary" plain>刷新</el-button>
+                    </div>
+                    
+                    <div class="single-manage" style="margin-top: auto; padding-top: 20px;">
+                        <div @click="scheduleForm = { groupName: '', date: '', time: '', file: '' }">清空数据</div>
+                        <div class="single-manage-submit" @click="AddScheduleForm">设置作业推送</div>
+                    </div>
+                </div>
+            </div>
+            <div class="double-box" v-if="menu == 'NOTICE'">
+                <div class="single-list-box" >
+                    <div class="list-box-tip">
+                        <span>消息提醒（当前：{{notices.length}} 提醒）</span>
+                        <el-button type="danger" plain @click="clearExpiredNotices">清理过期提醒</el-button>
+                    </div>
+                    <div class="schedule-item" v-for="item in notices" :key="item.id">
+                        <div class="schedule-item-top">
+                            <div class="schedule-item-top-time">提醒时间：{{item.date}} {{item.time}}</div>
+                            <div class="schedule-item-top-copy" @click="CopyNotice(item.id)">更新</div>
+                            <div class="schedule-item-top-del" @click="DeleteNotice(item.id)">删除</div>
+                        </div>
+                        <div class="schedule-item-content">提醒群组：<span>{{item.groupName}}</span></div>
+                        <div class="schedule-item-content">提醒消息：<span style="color: #757C8E;">{{item.content}}</span></div>
+                    </div>
+                </div>
+                <div class="single-manage-box">
+                    <div class="single-list-row">
+                        <div>提醒日期：</div>
+                        <el-date-picker style="flex: 1;"
+                            value-format="yyyy-MM-dd"
+                            v-model="noticeForm.date"
+                            type="date"
+                            placeholder="选择提醒日期">
+                        </el-date-picker>
+                    </div>
+                    <div class="single-list-row">
+                        <div>提醒时间：</div>
+                        <el-time-picker
+                            value-format="HH:mm:ss"
+                            class="time-select"
+                            v-model="noticeForm.time"
+                            :picker-options="{selectableRange: '00:00:00 - 23:59:59'}"
+                            placeholder="设置提醒时间">
+                        </el-time-picker>
+                    </div>
+                    <div class="single-list-row">
+                        <div>提醒群组：</div>
+                        <el-select style="flex: 1" multiple filterable v-model="noticeForm.groupName" placeholder="选择需要提醒微信群">
+                            <el-option
+                                v-for="item in groups"
+                                :key="item.id"
+                                :label="item.content"
+                                :value="item.content">
+                            </el-option>
+                        </el-select>
+                        <el-button @click="ChooseAllGroup('notices')" style="margin-left: 20px;" type="primary" plain>全选</el-button>
+                    </div>
+
+                    <div class="single-list-row">
+                        <div>提醒消息：</div>
+                        <el-input style="flex: 1"
+                            type="textarea"
+                            :autosize="{ minRows: 2, maxRows: 10}"
+                            resize="none"
+                            placeholder="请填写消息提醒内容"
+                            v-model="noticeForm.content">
+                        </el-input>
+                        </el-input>
+                    </div>
+                    
+                    <div class="single-manage" style="margin-top: auto; padding-top: 20px;">
+                        <div @click="noticeForm = { groupName: '', date: '', time: '', content: '' }">清空数据</div>
+                        <div class="single-manage-submit" @click="AddNoticeForm">设置消息提醒</div>
+                    </div>
+                </div>
+            </div>
+            <div class="double-box" v-if="menu == 'QUESTION'">
+                <div class="single-list-box" >
+                    <div class="list-box-tip">
+                        <span>题目问答（当前：{{problems.length}} 题目）</span>
+                        <el-button type="danger" plain @click="clearExpiredProblems">清理过期问答</el-button>
+                    </div>
+                    <div class="schedule-item" v-for="item in problems" :key="item.id">
+                        <div class="schedule-item-top">
+                            <div class="schedule-item-top-time">问答时间：{{item.date}} {{item.time}}</div>
+                            <div class="schedule-item-top-copy" @click="CopyProblem(item.id)">更新</div>
+                            <div class="schedule-item-top-del" @click="DeleteProblem(item.id)">删除</div>
+                        </div>
+                        <div class="schedule-item-content">问答群组：<span>{{item.groupName}}</span></div>
+                        <div class="schedule-item-content">问答编号：<span style="color: #000000;">{{item.serial}}</span></div>
+                        <div class="schedule-item-content">问答题目：<span style="color: #757C8E;">{{item.content}}</span></div>
+                        <div class="schedule-item-content">问答答案：<span style="color: #006BCF;">{{item.answer}}</span></div>
+                        <div class="schedule-item-content">问答解析：<span style="color: #757C8E;">{{item.detail}}</span></div>
+                    </div>
+                </div>
+                <div class="single-manage-box">
+                    <div class="single-list-row">
+                        <div>问答日期：</div>
+                        <el-date-picker style="flex: 1;"
+                            value-format="yyyy-MM-dd"
+                            v-model="problemForm.date"
+                            type="date"
+                            placeholder="选择问答日期">
+                        </el-date-picker>
+                    </div>
+                    <div class="single-list-row">
+                        <div>问答时间：</div>
+                        <el-time-picker
+                            value-format="HH:mm:ss"
+                            class="time-select"
+                            v-model="problemForm.time"
+                            :picker-options="{selectableRange: '00:00:00 - 23:59:59'}"
+                            placeholder="设置问答时间">
+                        </el-time-picker>
+                    </div>
+                    <div class="single-list-row">
+                        <div>问答群组：</div>
+                        <el-select style="flex: 1" multiple filterable v-model="problemForm.groupName" placeholder="选择需要提醒微信群">
+                            <el-option
+                                v-for="item in groups"
+                                :key="item.id"
+                                :label="item.content"
+                                :value="item.content">
+                            </el-option>
+                        </el-select>
+                        <el-button @click="ChooseAllGroup('problems')" style="margin-left: 20px;" type="primary" plain>全选</el-button>
+                    </div>
+                    <div class="single-list-row">
+                        <div>问答编号：</div>
+                        <el-input style="flex: 1;"
+                            placeholder="填写问答编号"
+                            v-model="problemForm.serial">
+                        </el-input>
+                    </div>
+
+                    <div class="single-list-row">
+                        <div>问答题目：</div>
+                        <el-input style="flex: 1"
+                            type="textarea"
+                            :autosize="{ minRows: 2, maxRows: 10}"
+                            resize="none"
+                            placeholder="请填写问答题目内容"
+                            v-model="problemForm.content">
+                        </el-input>
+                        </el-input>
+                    </div>
+
+                    <div class="single-list-row">
+                        <div>问答答案：</div>
+                        <el-input style="flex: 1;"
+                            placeholder="填写问答答案"
+                            v-model="problemForm.answer">
+                        </el-input>
+                    </div>
+
+                    <div class="single-list-row">
+                        <div>问答解析：</div>
+                        <el-input style="flex: 1"
+                            type="textarea"
+                            :autosize="{ minRows: 2, maxRows: 10}"
+                            resize="none"
+                            placeholder="请填写问答题目解析"
+                            v-model="problemForm.detail">
+                        </el-input>
+                        </el-input>
+                    </div>
+                    <div class="single-manage" style="margin-top: auto; padding-top: 20px;">
+                        <div @click="problemForm = { groupName: '', date: '', time: '', content: '', answer: '' }">清空数据</div>
+                        <div class="single-manage-submit" @click="AddProblemForm">设置问答题目</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="vue.min.js"></script>
+    <link rel="stylesheet" href="./theme.css">
+    <script src="./elementui.js"></script>
+    <script src="render.js"></script>
+</body>
+</html>

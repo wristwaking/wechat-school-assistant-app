@@ -1,0 +1,64 @@
+{
+  "version": "3.0.0",
+  "productName": "边缘骇客微信智能助教管理系统",
+  "description": "边缘骇客微信智能助教管理系统",
+  "author": "上海预醒网络科技有限公司",
+  "name": "EdgeHaker-School-WeChat",
+  "scripts": {
+    "start": "chcp 65001 && electron .",
+    "pack": "electron-builder --win --x64"
+  },
+  "build": {
+    "appId": "EdgeHaker-School-WeChat",
+    "productName": "边缘骇客微信智能助教管理系统",
+    "extraFiles": [
+      {
+        "from": "./_internal",
+        "to": "./_internal"
+      },
+      {
+        "from": "./data",
+        "to": "./data"
+      },
+      {
+        "from": "./workspace",
+        "to": "./workspace"
+      },
+      {
+        "from": "./启动机器人.exe",
+        "to": "."
+      }
+    ],
+    "directories": {
+      "output": "build"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "logo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "微信智能助教管理系统",
+      "license": "LICENSE.txt",
+      "uninstallDisplayName": "微信智能助教管理系统"
+    }
+  },
+  "nsis": {
+    "oneClick": false,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "echarts": "^5.5.0",
+    "moment": "^2.30.1",
+    "node-notifier": "^10.0.1",
+    "node-schedule": "^2.1.1",
+    "uuid": "^9.0.1",
+    "validator": "^13.11.0"
+  }
+}
