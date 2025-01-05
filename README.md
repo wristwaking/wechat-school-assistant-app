@@ -1,5 +1,5 @@
 # wechat-school-assistant-app 微信智能助教机器人
-微信智能助教机器人
+微信智能助教机器人：这是一款基于WeChatFerry框架实现微信智能助教机器人系统。
 
 # 打包程序
 ```
