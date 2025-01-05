@@ -1,4 +1,4 @@
-# wechat-school-assistant-app 微信智能助教机器人
+![image](https://github.com/user-attachments/assets/ad7a491e-a2db-43ca-8314-7f0793b2f97e)# wechat-school-assistant-app 微信智能助教机器人
 微信智能助教机器人
 
 # 打包程序
@@ -49,6 +49,13 @@ npm run pack
 ```
 
 ![image](https://github.com/user-attachments/assets/11e2bc5f-6f07-40cf-af2b-1a4a12ef7b99)
+
+# 可执行安装包
+![image](https://github.com/user-attachments/assets/cdac1549-1e25-44d3-80e0-ab7f4bb29ddc)
+
+![image](https://github.com/user-attachments/assets/f723c0e2-7722-4199-bfed-a0491a58511e)
+
+![image](https://github.com/user-attachments/assets/3adc0188-bc07-4fcb-94bf-43c3d54c844f)
 
 
 # 程序截图
