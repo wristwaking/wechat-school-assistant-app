@@ -34,6 +34,23 @@ npm run pack
 npm install electron -D
 ```
 
+```
+npm run pack
+
+> EdgeHaker-School-WeChat@3.0.0 pack
+> electron-builder --win --x64
+
+  • electron-builder  version=24.9.1 os=10.0.22621
+  • loaded configuration  file=package.json ("build" field)
+  • writing effective config  file=build\builder-effective-config.yaml
+  • packaging       platform=win32 arch=x64 electron=33.2.1 appOutDir=build\win-unpacked
+  • building        target=nsis file=build\边缘骇客微信智能助教管理系统 Setup 3.0.0.exe archs=x64 oneClick=false perMachine=false
+  • building block map  blockMapFile=build\边缘骇客微信智能助教管理系统 Setup 3.0.0.exe.blockmap
+```
+
+![image](https://github.com/user-attachments/assets/11e2bc5f-6f07-40cf-af2b-1a4a12ef7b99)
+
+
 # 程序截图
 
 ![image](https://github.com/user-attachments/assets/279dd3ab-738d-4c65-900f-4f118f91dd6c)
