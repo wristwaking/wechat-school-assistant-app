@@ -25,8 +25,8 @@
         "to": "./workspace"
       },
       {
-        "from": "./启动机器人.exe",
-        "to": "."
+        "from": "./launch-bot.exe",
+        "to": "./launch-bot.exe"
       }
     ],
     "directories": {
@@ -60,5 +60,8 @@
     "node-schedule": "^2.1.1",
     "uuid": "^9.0.1",
     "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1"
   }
 }
