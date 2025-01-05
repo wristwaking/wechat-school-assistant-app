@@ -1,2 +1,2 @@
-# wechat-school-assistant-app
+# wechat-school-assistant-app 微信智能助教机器人
 微信智能助教机器人
