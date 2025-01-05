@@ -1,0 +1,370 @@
+* {
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    flex-shrink: 0;
+    font-family: "alibaba";
+    font-size: 13px;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+@font-face {
+    font-family: "alibaba";
+    src: url("alibaba.ttf") format("woff"),
+        url("alibaba.ttf") format("truetype");
+}
+
+.contain {
+    padding: 20px;
+    width: 1020px;
+    --main-height: 675px;
+    border-radius: 10px;
+    overflow: hidden;
+    outline: none;
+    display: flex;
+    background-color: #F3F6FD;
+    -webkit-app-region: drag;
+}
+
+
+.left-menu {
+    height: 675px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.left-menu-logo {
+    background-color: white;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -webkit-app-region: no-drag;
+    cursor: pointer;
+}
+
+.left-menu-btn {
+    background-color: white;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    width: 80px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bolder;
+    color: #757c8e;
+    -webkit-app-region: no-drag;
+}
+
+
+.top-menu {
+    height: 60px;
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+}
+
+.top-menu-time {
+    height: 60px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #1296DB;
+    -webkit-app-region: no-drag;
+    flex: 1;
+}
+
+.top-menu-time div {
+    display: flex;
+    align-items: center;
+}
+
+.top-menu-mini {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    margin-left: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+.top-menu-delete {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    margin-left: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+.main-container {
+    width: 920px;
+}
+
+.list-box {
+    width: 920px;
+    border-radius: 5px;
+    height: 595px;
+    background-color: white;
+    overflow-y: scroll;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    -webkit-app-region: no-drag;
+    margin-right: 20px;
+}
+
+#echart-figure {
+    width: 880px;
+    height: 505px;
+    margin: 20px;
+    background-color: #F3F6FD;
+}
+
+.list-box-tip {
+    padding: 0 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-top: 10px;
+    font-size: 15px;
+    justify-content: space-between;
+}
+
+.list-box-tip span {
+    font-size: 15px;
+}
+
+.list-box-tip button {
+    height: 30px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.list-box-item {
+    height: 35px;
+    background-color: #ECEFF7;
+    padding: 0 10px;
+    height: 35px;
+    color: #444857;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 20px;
+    box-sizing: border-box;
+    width: 410px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.list-box-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 375px;
+}
+
+.list-box::-webkit-scrollbar {
+    display: none;
+}
+
+.double-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* 时间管理 */
+.time-box {
+    width: 450px;
+    border-radius: 5px;
+    height: 595px;
+    background-color: white;
+    overflow-y: scroll;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    -webkit-app-region: no-drag;
+    margin-right: 20px;
+}
+
+.time-box::-webkit-scrollbar {
+    display: none;
+}
+
+.time-box-tip {
+    padding: 0 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.time-box-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: #757c8e;
+}
+
+.time-select {
+    flex: 1
+}
+
+.time-submit {
+    height: 40px;
+    background-color: #444857;
+    padding: 0 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 20px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+/* 单列表 */
+.single-list-box {
+    width: 450px;
+    border-radius: 5px;
+    height: 595px;
+    background-color: white;
+    overflow-y: scroll;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    -webkit-app-region: no-drag;
+    margin-right: 20px;
+}
+
+.single-manage-box {
+    width: 450px;
+    border-radius: 5px;
+    height: 595px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .1);
+    padding: 20px 0;
+    -webkit-app-region: no-drag;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.single-manage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.single-manage div {
+    height: 40px;
+    background-color: #444857;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.single-manage-submit {
+    flex: 1;
+    margin-left: 20px;
+    justify-content: center;
+}
+
+.single-list-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: #757c8e;
+}
+
+.time-select {
+    flex: 1
+}
+
+
+/* 任务功能 */
+.schedule-item {
+    margin: 20px;
+    background-color: #ECEFF7;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.schedule-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 25px;
+}
+
+.schedule-item-top-time {
+    height: 25px;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.schedule-item-top-copy {
+    background-color: #7467BD;
+    padding: 0 10px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.schedule-item-top-del {
+    background-color: #CF0004;
+    padding: 0 10px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.schedule-item-content {
+    margin-top: 10px;
+    line-height: 25px;
+}
+
+.schedule-item-content > span {
+    user-select: text;
+}
