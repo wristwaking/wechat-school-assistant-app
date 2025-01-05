@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/ad7a491e-a2db-43ca-8314-7f0793b2f97e)# wechat-school-assistant-app 微信智能助教机器人
+# wechat-school-assistant-app 微信智能助教机器人
 微信智能助教机器人
 
 # 打包程序
